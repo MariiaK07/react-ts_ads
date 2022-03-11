@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './App.scss';
+import 'bulma';
+import '@fortawesome/fontawesome-free/css/all.css';
 
-export default App;
+import { Layout } from './components/Layout/Layout';
+import { HomePage } from './components/pages/HomePage/HomePage';
+import { AdsPage } from './components/pages/AdsPage/AdsPage';
+import { SingleAd } from './components/pages/AdsPage/SingleAd';
+import { CreateAd } from './components/pages/AdsPage/CreateAd';
+import { EditAd } from './components/pages/AdsPage/EditAd';
+import { NotFoundPage } from './components/pages/NotFoundPage/NotFoundPage';
+import { AdsProvider } from './components/hoc/AdsProvider';
+
+export const App: React.FC = () => (
+  <AdsProvider>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/home"
+          element={<Navigate to="/" replace />}
+        />
+        <Route path="ads" element={<AdsPage />} />
+        <Route path="ads/:id" element={<SingleAd />} />
+        <Route path="ads/new" element={<CreateAd />} />
+        <Route path="ads/:id/edit" element={<EditAd />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  </AdsProvider>
+);

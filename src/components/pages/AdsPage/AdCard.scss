@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 240px;
+  flex-grow: 1;
+  height: 240px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 8px 8px 8px 0 rgba(34, 60, 80, 0.5);
+
+  &__title {
+    font-size: 24px;
+    transition: transform 0.5s;
+  }
+
+  &:hover .card__title {
+    transform: scale(1.1);
+  }
+}
